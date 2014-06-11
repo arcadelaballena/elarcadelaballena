@@ -38,7 +38,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         // Llamamos al metodo para lanzar los elementos que conforman la ventana
         iniciarComponentes();
         setTitle("Busqueda - El arca de la ballena");
-        setSize(730,440);
+        setSize(730,440); //Tamaño de la ventana
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
