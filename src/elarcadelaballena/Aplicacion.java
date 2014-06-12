@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package elarcadelaballena;
+
+import basesdedatos.Basesdedatos;
 
 /**
  *
@@ -16,11 +17,14 @@ public class Aplicacion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-               
+        Basesdedatos datos = new Basesdedatos(null,"basllena", "root", "root");
+        datos.conectar();
+        String[] prueba = datos.seleccion("*", "juegos", null);
+        for (int i=0;i<prueba.length;i++){
+            System.out.println(prueba[i]);
+        }
         //VentanaJuegos obx = new VentanaJuegos();
         //VentanaLogin log = new VentanaLogin();
-        VentanaBusqueda busq = new VentanaBusqueda();
+        //VentanaBusqueda busq = new VentanaBusqueda();
     }
-  }
-    
-
+}
