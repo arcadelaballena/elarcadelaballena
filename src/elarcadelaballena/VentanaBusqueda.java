@@ -106,7 +106,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         campBuscar.setVisible(false);
         
         //etiqueta con diferentes ejemplos segun lo que vayamos a buscar.
-        ejemplo = new JLabel("Como por ejemplo Bla bla bla bnla balba");
+        ejemplo = new JLabel("Como por ejemplo Portal, Fez, Bioshock...");
         ejemplo.setFont(b);
         ejemplo.setBounds(265,280, 300, 20);
         ejemplo.setVisible(false);
@@ -246,6 +246,8 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         campBuscar.setVisible(false);
         ejemplo.setVisible(false);
         combaño.setVisible(true);
+        combaño2.setVisible(false);
+        guion.setVisible(false);
     }
     
     //Metodo que muestra elementos para buscar un juego entre un intervalo de fechas
@@ -375,7 +377,8 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                     break;
             //Ir a la ventana de cambiar usuario
             case "Cambiar de usuario"  :
-                    System.out.println("Usuario");
+                    VentanaLogin VL = new VentanaLogin();
+                    this.setVisible(false);
                     break;
             //Volver a los botones Buscar, Ver favoritos y Cambiar usuario
             case "Volver":
@@ -395,17 +398,37 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                     case "Intervalo de fechas":
                         buscarInterFecha();
                         break;
-                    //Mostrar elementos para buscar por Nombre, Genero, Desarrolladora o Distribuidora.
-                    case "Nombre": case"Genero" : case"Desarrolladora" :case"Distribudora":
+                    //Mostrar elementos para buscar por Nombre
+                    case "Nombre": 
                         elementosBuscar();
+                        ejemplo.setText("Como por ejemplo Portal, Fez, Bioshock...");
                         break;
-                    
+                    //Mostrar elementos para buscar por Nombre
+                    case"Genero" : 
+                        elementosBuscar();
+                        ejemplo.setText("Como por ejemplo FPS, RPG, Puzzle...");
+                        break;
+                    //Mostrar elementos para buscar por Genera
+                    case"Desarrolladora" :
+                        elementosBuscar();
+                        ejemplo.setText("Como por ejemplo Rockstar, Valve, Bethesda...");
+                        break;
+                    //Mostrar elementos para buscar por Desarrolladora
+                    case"Distribudora":
+                        elementosBuscar();
+                        ejemplo.setText("Como por ejemplo Sega, Valve, Gearbox...");
+                        break;
+                        
                 }
                  break;
                 
             //Mostrar la tabla con todos los juegos
             case "Ver todos":
                 cargaTablaAll();
+                break;
+                
+            case "Ver juego":
+                VentanaJuegos VJ = new VentanaJuegos();
                 break;
         } 
 }
