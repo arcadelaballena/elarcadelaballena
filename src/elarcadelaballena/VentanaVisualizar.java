@@ -18,6 +18,10 @@ import javax.swing.*;
  */
 public class VentanaVisualizar extends JFrame{
     
+    /*
+    Ventana visualizadora
+    */
+    
     Container panel;
     
     
