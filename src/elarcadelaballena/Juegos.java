@@ -11,7 +11,7 @@ package elarcadelaballena;
  */
 public class Juegos {
 
-    private String nombre, genero, desarrollador, distribuidor, fechaSalida, comentario, enlace;
+    private String nombre, genero, desarrollador, distribuidor, fechaSalida, comentario, enlace, portada, imagen1, imagen2;
 
     public Juegos() {
     }
@@ -25,6 +25,12 @@ public class Juegos {
         this.comentario = comentario;
         this.enlace = enlace;
 
+    }
+
+    public Juegos(String portada, String imagen1, String imagen2) {
+        this.portada = portada;
+        this.imagen1 = imagen1;
+        this.imagen2 = imagen2;
     }
 
     public String getNombre() {
