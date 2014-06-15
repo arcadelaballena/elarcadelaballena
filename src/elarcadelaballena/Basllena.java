@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Naruba
+ * @author Iago
  */
 public class Basllena {
 
@@ -54,9 +54,11 @@ public class Basllena {
                         resultado.getString("enlace")));//Almacena mos los datos en el arrayList.
 
             }
+            conexion.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error en la obtencion de consulta");
         }
+
         return ley;//devuelve el ArrayList declarado arriba de tipo Juegos. 
     }
 
@@ -137,5 +139,54 @@ public class Basllena {
             JOptionPane.showMessageDialog(null, " Error en la obtencion de consulta");
         }
         return leyenda;
+    }
+
+    public boolean comprobarUser(String nombre, String contra) {
+        boolean comprobante = false;
+        String[] nombres = null;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select nombre from usuarios;");
+            while (resultado.next()) {
+                nombres = new String[]{resultado.getString("nombre")};
+            }
+            for (int i = 0; i < nombres.length; i++) {
+                if (nombres[i].equalsIgnoreCase(nombre)) {
+
+                    if (comprobarContra(nombre, contra)) {
+                        comprobante = true;
+                        break;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El nombre no concuerda con ninguno existente.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error en la obtencion de la consulta");
+        }
+        return comprobante;
+    }
+
+    public boolean comprobarContra(String nombre, String contra) {
+        String comprueba = null;
+        boolean comprobante = false;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select contraseña from usuarios where nombre='admin';");
+            while (resultado.next()) {
+                comprueba = resultado.getString("contraseña");
+                if (comprueba.equals(contra)) {
+                    System.out.println(comprueba);
+                    comprobante = true;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña no concuerda");
+                }
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error en la obtencion de la consulta");
+        }
+        return comprobante;
     }
 }

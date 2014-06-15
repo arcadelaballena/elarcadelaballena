@@ -16,10 +16,10 @@ public class Aplicacion {
      */
     public static void main(String[] args) {
         Basllena base = new Basllena();
-        
+        base.comprobarUser("admin", "vallena");
 
         //VentanaJuegos obx = new VentanaJuegos();
         //VentanaLogin log = new VentanaLogin();
-        //VentanaBusqueda busq = new VentanaBusqueda();
+       //VentanaBusqueda busq = new VentanaBusqueda();
     }
 }
