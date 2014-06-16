@@ -86,7 +86,7 @@ public class Basllena {
         ArrayList<Juegos> ley = new ArrayList();
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from juegos where fechaSalida like '" + fecha1 + "%' AND fechaSalida like'" + fecha2 + "%';");
+            resultado = consulta.executeQuery("select * from juegos where fechaSalida>= '" + fecha1 + "-01-01' AND fechaSalida<='" + fecha2 + "-12-31';");
             while (resultado.next()) {
                 ley.add(new Juegos(resultado.getString("nombre"),
                         resultado.getString("genero"),
@@ -188,19 +188,41 @@ public class Basllena {
         }
         return comprobante;
     }
-
-    public boolean creacionUser(String nombre, String contra, String email) {
-        boolean comprobante = false;
-        String[] nombres = null;
+/**
+ * Este metodo administrará la creación de usuarios. Si el nombre ya existe en la base, devolverá un 1
+ * si el email ya está en uso, devolverá un 2
+ * si la contraseña no es la misma, devolverá un 3.
+ * 
+ * @param nombre
+ * @param contra
+ * @param recontra
+ * @param email
+ * @return 
+ */
+    public int creacionUser(String nombre, String contra, String recontra, String email) {
+        
+        int comprobante = 0;
+        String[] cuenta = null;
+        String[] emails = null;
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select nombre from usuarios;");
+            resultado = consulta.executeQuery("select nombre,email from usuarios;");
             while (resultado.next()) {
-                nombres = new String[]{resultado.getString("nombre")};
+                cuenta = new String[]{resultado.getString("nombre")};
+                emails = new String[]{resultado.getString("email")};
             }
-            for (int i = 0; i < nombres.length; i++) {
-                if (nombres[i].equalsIgnoreCase(nombre)) {
-                    
+            for (int i = 0; i < cuenta.length; i++) {
+                if (cuenta[i].equalsIgnoreCase(nombre)) {
+                    comprobante = 1;
+                    break;
+                } else if (emails[i].equalsIgnoreCase(email)) {
+                    comprobante = 2;
+                    break;
+                } else if (!contra.equals(recontra)) {
+                    comprobante = 3;
+                    break;
+                } else {
+                    comprobante = 0;
                 }
             }
         } catch (SQLException ex) {
