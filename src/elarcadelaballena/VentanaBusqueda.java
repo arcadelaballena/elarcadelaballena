@@ -305,12 +305,17 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     //Metodo para mostrar todos los juegos, se le llama desde el boton Ver Todos 
     public void cargaTablaAll(int contador) {
         
-        
-        if(contador==1){
-            game = con.devolverTodo();
-        }else if(contador==2){
-             game = con.devolverBusqueda((String)parametros.getSelectedItem(), campBuscar.getText());
+        switch(contador){
+            case 1:
+                game = con.devolverTodo();
+                break;
+            case 2:  
+                game = con.devolverBusqueda((String)parametros.getSelectedItem(), campBuscar.getText());
+                break;
+            case 3:
+                game = con.devolverFecha((String)combaño.getSelectedItem(), (String)combaño.getSelectedItem());
         }
+        
         
         //En este metodo creamos una tabla con todos los datos de los juegos
         volver.setVisible(false);
@@ -464,7 +469,14 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 break;
                 
             case "Iniciar Busqueda":
+                
                 contador = 2;
+                if((combaño.isVisible()==true)&&(combaño2.isVisible()==false)){
+                 contador=3;   
+                }else if((combaño.isVisible()==true)&&(combaño2.isVisible()==true)){
+                 contador=4;
+                }
+                System.out.println(contador);
                 cargaTablaAll(contador);
                 break;
         } 
