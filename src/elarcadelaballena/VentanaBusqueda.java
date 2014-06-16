@@ -31,8 +31,10 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     DefaultTableModel modelotabla, modelotablaAll;
     JScrollPane scroll, scroll2;
     String ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace,Ltitulo, Limagen1, Limagen2;
+    int aux;
     
-    Basllena con;
+    ArrayList<Juegos> game;
+    Basllena con = new Basllena();
     VentanaJuegos VJ;
     Juegos jue;
     
@@ -124,7 +126,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         buscarpor.setVisible(false);
         
         //elementos del Combo Box llamado parametros
-        String[] paramet = { "Nombre", "Genero", "Desarrolladora", "Distribudora", "Fecha de salida","Intervalo de fechas" };
+        String[] paramet = { "Nombre", "Genero", "Desarrollador", "Distribuidor", "Fecha de salida","Intervalo de fechas" };
         parametros = new JComboBox(paramet);
         parametros.setFont(b);
         parametros.setBounds(60, 240, 150, 20);
@@ -301,7 +303,14 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         }
     
     //Metodo para mostrar todos los juegos, se le llama desde el boton Ver Todos 
-    public void cargaTablaAll() {
+    public void cargaTablaAll(int contador) {
+        
+        
+        if(contador==1){
+            game = con.devolverTodo();
+        }else if(contador==2){
+             game = con.devolverBusqueda((String)parametros.getSelectedItem(), campBuscar.getText());
+        }
         
         //En este metodo creamos una tabla con todos los datos de los juegos
         volver.setVisible(false);
@@ -332,32 +341,41 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             modelotablaAll.addColumn("Desarrollador");
             modelotablaAll.addColumn("Distribuidor");
             modelotablaAll.addColumn("Fecha de salida");
-            modelotablaAll.addColumn("Link");
             //Añadimos una fila por cada juego
-
-            modelotablaAll.addRow(new String [] {});
+               // ArrayList<Juegos> game = con.devolverTodo();
+            for(int i=0; i<game.size();i++){
+                
+                System.out.println(game.get(i));
+                Juegos aux = game.get(i);
+                String []juego = {aux.getNombre(),aux.getGenero(), aux.getDesarrollador(), aux.getDistribuidor(),
+                                  aux.getFechaSalida(), aux.getEnlace()};
+                modelotablaAll.addRow(juego);
+            
+            }
+            
+            
+            
+            
             
             //Creamos la tabla y le damos valores maximos y minimos al ancho de cada columna para evitar que el usuario pueda cambiarlas
-            JTable tabla = new JTable(modelotablaAll);
-            tabla = new JTable(modelotablaAll);
-            TableColumn columna = tabla.getColumn("Nombre");
+            tablaAll = new JTable(modelotablaAll);
+            
+            tablaAll = new JTable(modelotablaAll);
+            TableColumn columna = tablaAll.getColumn("Nombre");
             columna.setMaxWidth(150);
             columna.setMinWidth(150);
-            TableColumn columna2 = tabla.getColumn("Desarrollador");
+            TableColumn columna2 = tablaAll.getColumn("Desarrollador");
             columna2.setMaxWidth(150);
             columna2.setMinWidth(150);  
-            TableColumn columna3 = tabla.getColumn("Genero");
+            TableColumn columna3 = tablaAll.getColumn("Genero");
             columna3.setMaxWidth(150);
             columna3.setMinWidth(150);
-            TableColumn columna4 = tabla.getColumn("Distribuidor");
-            columna4.setMaxWidth(130);
-            columna4.setMinWidth(130);
-            TableColumn columna5 = tabla.getColumn("Enlace");
+            TableColumn columna4 = tablaAll.getColumn("Distribuidor");
             columna4.setMaxWidth(130);
             columna4.setMinWidth(130);
             
-            tabla.getTableHeader().setReorderingAllowed(false);
-            scroll2 = new JScrollPane(tabla);
+            tablaAll.getTableHeader().setReorderingAllowed(false);
+            scroll2 = new JScrollPane(tablaAll);
             scroll2.setBounds(20, 200, 690, 125);
             
             //Añadimos la tabla al panel
@@ -376,6 +394,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         
         //en opcion recogemos el valor que devuelve el evento en un String para poder comparar en el Switch
         String opcion = String.valueOf(ev.getActionCommand());
+        int contador=0;
         
         switch(opcion){
             
@@ -421,12 +440,12 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                         ejemplo.setText("Como por ejemplo FPS, RPG, Puzzle...");
                         break;
                     //Mostrar elementos para buscar por Genera
-                    case"Desarrolladora" :
+                    case"Desarrollador" :
                         elementosBuscar();
                         ejemplo.setText("Como por ejemplo Rockstar, Valve, Bethesda...");
                         break;
                     //Mostrar elementos para buscar por Desarrolladora
-                    case"Distribudora":
+                    case"Distribuidor":
                         elementosBuscar();
                         ejemplo.setText("Como por ejemplo Sega, Valve, Gearbox...");
                         break;
@@ -436,22 +455,8 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 
             //Mostrar la tabla con todos los juegos
             case "Ver todos":
-                
-                
-                ArrayList<Juegos> ley = con.devolverTodo();
-                System.out.println(ley.get(1));
-                
-                Juegos lista[]= new Juegos[27];
-                
-                String info[]= new String[6];
-                
-            for(int i=0; i<27;i++){
-                lista[i]=ley.get(i);
-                System.out.println(lista[i]);
-                for(int x=0;x<6;x++)
-                    info[x]=lista.toString();
-                
-            }
+                contador=1;
+                cargaTablaAll(contador);
                 break;
                 
             case "Ver juego":
@@ -459,9 +464,8 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 break;
                 
             case "Iniciar Busqueda":
-                
-                
-                
+                contador = 2;
+                cargaTablaAll(contador);
                 break;
         } 
 }
@@ -470,14 +474,17 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     public void verJuego(){
         
         String auxtit;
-        
-        if(scroll.isVisible()==true){
-            int i  = tablaAll.getSelectedRow();
-            auxtit = (String)tablaAll.getValueAt(i, 1);
-            System.out.println(auxtit);
-        }
-
-        VJ = new VentanaJuegos(ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace, Ltitulo, Limagen1, Limagen2);
+            int i = tablaAll.getSelectedRow();
+            auxtit = (String)tablaAll.getValueAt(i, 0);
+            
+            Juegos game;
+            Juegos igame;
+            game = con.devolverUno(auxtit);
+            igame = con.devolverImagen(auxtit);
+            System.out.println(igame.getPortada());
+            
+        VJ = new VentanaJuegos(game.getNombre(), game.getGenero(),  game.getDesarrollador(),  game.getDistribuidor(),
+                game.getFechaSalida(),  game.getComentario(),  game.getEnlace(), igame.getPortada(), igame.getImagen1(), igame.getImagen2());
         
     }
             

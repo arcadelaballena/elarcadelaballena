@@ -31,8 +31,22 @@ public class VentanaJuegos extends JFrame{
     
     
     
-    public VentanaJuegos(String ititulo,String igenero, String desarrollador, String distribuidor, String fechaSalida, String comentario, String enlace, String Ltitulo, String Limagen1, String Limagen2){
-        // Llamamos al metodo para lanzar los elementos que conforman la ventana 
+    public VentanaJuegos(String ititulo,String igenero, String idesarrollador, String idistribuidor, String ifechaSalida, String icomentario, String ienlace, String Ltitulo, String Limagen1, String Limagen2){
+        
+        this.ititulo=ititulo;
+        this.igenero=igenero;
+        this.idesarrollador=idesarrollador;
+        this.idistribuidor=idistribuidor;
+        this.ifechaSalida=ifechaSalida;
+        this.icomentario=icomentario;
+        this.ienlace=ienlace;
+        this.Ltitulo=Ltitulo;
+        this.Limagen1=Limagen1;
+        this.Limagen2=Limagen2;
+                
+                
+                
+// Llamamos al metodo para lanzar los elementos que conforman la ventana 
         iniciarComponentes();
         setTitle("Juegos Basllena - El arca de la ballena");
         setSize(1280,720);
@@ -129,6 +143,7 @@ public class VentanaJuegos extends JFrame{
         portada.setBounds(20, 40, 400, 600);
         //llamamos a la imagen en imgur.com
         String ruta=Ltitulo; 
+        System.out.println(Ltitulo);
         try {
             img = new ImageIcon(new URL(ruta));
         } catch (MalformedURLException ex) {

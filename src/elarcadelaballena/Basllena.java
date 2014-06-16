@@ -54,7 +54,6 @@ public class Basllena {
                         resultado.getString("enlace")));//Almacena mos los datos en el arrayList.
 
             }
-            conexion.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error en la obtencion de consulta");
         }

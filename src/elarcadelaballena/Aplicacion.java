@@ -17,11 +17,11 @@ public class Aplicacion {
     public static void main(String[] args) {
 
 
-        Basllena base = new Basllena();
-        base.comprobarUser("admin", "vallena");
+        //Basllena base = new Basllena();
+        //base.comprobarUser("admin", "vallena");
 
         
-        //VentanaLogin log = new VentanaLogin();
+        VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
         //VentanaBusqueda busq = new VentanaBusqueda();
         //VentanaVisualizar vis = new VentanaVisualizar();

@@ -89,4 +89,46 @@ public class Juegos {
         this.enlace = enlace;
     }
 
+    /**
+     * @return the portada
+     */
+    public String getPortada() {
+        return portada;
+    }
+
+    /**
+     * @param portada the portada to set
+     */
+    public void setPortada(String portada) {
+        this.portada = portada;
+    }
+
+    /**
+     * @return the imagen1
+     */
+    public String getImagen1() {
+        return imagen1;
+    }
+
+    /**
+     * @param imagen1 the imagen1 to set
+     */
+    public void setImagen1(String imagen1) {
+        this.imagen1 = imagen1;
+    }
+
+    /**
+     * @return the imagen2
+     */
+    public String getImagen2() {
+        return imagen2;
+    }
+
+    /**
+     * @param imagen2 the imagen2 to set
+     */
+    public void setImagen2(String imagen2) {
+        this.imagen2 = imagen2;
+    }
+
 }
