@@ -5,6 +5,7 @@
 package elarcadelaballena;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class VentanaJuegos extends JFrame{
     JTextArea comentario;
     JButton botonFav;
     ImageIcon img;
+    VentanaVisualizar VV= new VentanaVisualizar();
     
     public VentanaJuegos(){
         // Llamamos al metodo para lanzar los elementos que conforman la ventana 
@@ -31,7 +33,7 @@ public class VentanaJuegos extends JFrame{
         setTitle("Juegos Basllena - El arca de la ballena");
         setSize(1280,720);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setResizable(false);
         setVisible(true);
     }
@@ -114,7 +116,7 @@ public class VentanaJuegos extends JFrame{
         //Boton para añadir un juego a favoritos
         botonFav = new JButton("Añadir a Favoritos");
         botonFav.setFont(e);
-        botonFav.setBounds(530, 380, 150, 20);
+        botonFav.setBounds(530, 380, 200, 20);
         
         //Imagen de la portada del juego
         portada = new JLabel();
@@ -139,6 +141,15 @@ public class VentanaJuegos extends JFrame{
             System.out.println("Error al cargar imagen1");    
         }
         imagen1.setIcon(new ImageIcon(img.getImage().getScaledInstance(250, 125, Image.SCALE_SMOOTH)));
+        imagen1.addMouseListener(new java.awt.event.MouseAdapter() {
+ 
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(e.getClickCount()==1){
+                VV.Cerrar();
+            }
+        }
+        });
         
         //imagen 2 del juego
         imagen2 = new JLabel();

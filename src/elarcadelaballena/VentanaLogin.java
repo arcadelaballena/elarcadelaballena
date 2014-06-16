@@ -5,13 +5,15 @@
 package elarcadelaballena;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  *
  * @author Pedro
  */
-public class VentanaLogin extends JFrame{
+public class VentanaLogin extends JFrame implements ActionListener{
     
     Container panel;
     JLabel imagen, usuario, contra;
@@ -82,11 +84,13 @@ public class VentanaLogin extends JFrame{
         entrar = new JButton("Entrar");
         entrar.setFont(e);
         entrar.setBounds(50, 420, 120, 20);
+        entrar.addActionListener(this);
         
         //Boton para registrar un usuario nuevo
         registrar = new JButton("Registrarse");
         registrar.setFont(e);
         registrar.setBounds(210, 420, 120, 20);
+        registrar.addActionListener(this);
         
         //Por ultimo añadimos todos los elementos el panel
         panel.add(imagen);
@@ -98,6 +102,23 @@ public class VentanaLogin extends JFrame{
         panel.add(recordarc);
         panel.add(entrar);
         panel.add(registrar);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        
+         //en opcion recogemos el valor que devuelve el evento en un String para poder comparar en el Switch
+        String opcion = String.valueOf(ev.getActionCommand());
+        
+        switch(opcion){
+            case "Entrar" :
+                VentanaBusqueda VB = new VentanaBusqueda();
+                this.setVisible(false);
+                break;
+            case "Registrarse":
+                System.out.println("Registrar un usuario");
+                break;
+        }
     }
     
    
