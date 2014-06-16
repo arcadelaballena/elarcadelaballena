@@ -23,9 +23,12 @@ public class VentanaVisualizar extends JFrame{
     */
     
     Container panel;
+    JLabel imagen;
+    ImageIcon img;
     
-    
-    public VentanaVisualizar(){
+    public VentanaVisualizar(ImageIcon img){
+        this.img=img;
+        
         iniciarComponentes();
         setTitle("Visualizar - El arca de la ballena");
         setSize(1280,720);
@@ -53,6 +56,14 @@ public class VentanaVisualizar extends JFrame{
             
         }
         });
+        
+        
+        imagen = new JLabel();
+        imagen.setIcon(new ImageIcon(img.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)));
+        imagen.setBounds(0, 0, 1280, 720);
+        
+        panel.add(imagen);
+        
     }
     public void Cerrar(){
         this.setVisible(false);

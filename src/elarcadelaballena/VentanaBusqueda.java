@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -29,6 +30,11 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     JTable tablaFav, tablaAll;
     DefaultTableModel modelotabla, modelotablaAll;
     JScrollPane scroll, scroll2;
+    String ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace,Ltitulo, Limagen1, Limagen2;
+    
+    Basllena con;
+    VentanaJuegos VJ;
+    Juegos jue;
     
         Font e = new java.awt.Font("Georgia", Font.BOLD,14);
         Font b = new java.awt.Font("Georgia", Font.PLAIN,14);
@@ -326,8 +332,10 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             modelotablaAll.addColumn("Desarrollador");
             modelotablaAll.addColumn("Distribuidor");
             modelotablaAll.addColumn("Fecha de salida");
+            modelotablaAll.addColumn("Link");
             //Añadimos una fila por cada juego
-            modelotablaAll.addRow(new String [] {"Portal","Puzzle","Valve","Valve","XX/XX/XXX"});
+
+            modelotablaAll.addRow(new String [] {});
             
             //Creamos la tabla y le damos valores maximos y minimos al ancho de cada columna para evitar que el usuario pueda cambiarlas
             JTable tabla = new JTable(modelotablaAll);
@@ -344,6 +352,10 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             TableColumn columna4 = tabla.getColumn("Distribuidor");
             columna4.setMaxWidth(130);
             columna4.setMinWidth(130);
+            TableColumn columna5 = tabla.getColumn("Enlace");
+            columna4.setMaxWidth(130);
+            columna4.setMinWidth(130);
+            
             tabla.getTableHeader().setReorderingAllowed(false);
             scroll2 = new JScrollPane(tabla);
             scroll2.setBounds(20, 200, 690, 125);
@@ -424,12 +436,50 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 
             //Mostrar la tabla con todos los juegos
             case "Ver todos":
-                cargaTablaAll();
+                
+                
+                ArrayList<Juegos> ley = con.devolverTodo();
+                System.out.println(ley.get(1));
+                
+                Juegos lista[]= new Juegos[27];
+                
+                String info[]= new String[6];
+                
+            for(int i=0; i<27;i++){
+                lista[i]=ley.get(i);
+                System.out.println(lista[i]);
+                for(int x=0;x<6;x++)
+                    info[x]=lista.toString();
+                
+            }
                 break;
                 
             case "Ver juego":
-                VentanaJuegos VJ = new VentanaJuegos();
+                verJuego();
+                break;
+                
+            case "Iniciar Busqueda":
+                
+                
+                
                 break;
         } 
 }
+    
+    
+    public void verJuego(){
+        
+        String auxtit;
+        
+        if(scroll.isVisible()==true){
+            int i  = tablaAll.getSelectedRow();
+            auxtit = (String)tablaAll.getValueAt(i, 1);
+            System.out.println(auxtit);
+        }
+
+        VJ = new VentanaJuegos(ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace, Ltitulo, Limagen1, Limagen2);
+        
+    }
+            
+            
 }
