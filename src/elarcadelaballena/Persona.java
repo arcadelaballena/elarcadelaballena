@@ -11,13 +11,13 @@ package elarcadelaballena;
  */
 public class Persona {
 
-    private String nombre, alias,email;
+    private String nombre,email;
 
     public Persona() {
     }
-    public Persona(String nombre,String alias,String email){
+    public Persona(String nombre,String email){
     this.nombre=nombre;
-    this.alias=alias;
+    
     this.email=email;
     
     }
@@ -30,13 +30,7 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
+   
 
     public String getEmail() {
         return email;

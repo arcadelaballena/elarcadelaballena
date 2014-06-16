@@ -13,7 +13,7 @@ public class Invitado extends Persona {
 
     public Invitado() {
         super.setNombre(null);
-        super.setAlias(null);
+        
         super.setEmail(null);
     }
 }
