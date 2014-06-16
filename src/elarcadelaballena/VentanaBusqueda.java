@@ -24,14 +24,14 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     JButton volver, buscar, verFav, cambusuario;
     JButton iniBuscar, vertodos,verjuego; 
     JTextField campBuscar;
-    JLabel imagen, ejemplo, buscarpor, erroraño, guion;
+    JLabel imagen, ejemplo, buscarpor, erroraño, guion, resumen;
     JComboBox parametros, combaño, combaño2;
     ImageIcon img;
     JTable tablaFav, tablaAll;
     DefaultTableModel modelotabla, modelotablaAll;
     JScrollPane scroll, scroll2;
     String ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace,Ltitulo, Limagen1, Limagen2;
-    int aux;
+    int aux, control;
     
     ArrayList<Juegos> game;
     Basllena con = new Basllena();
@@ -89,6 +89,16 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         volver.setBounds(40, 350, 100, 20);
         volver.addActionListener(this);
         volver.setVisible(false);
+        
+        //Explicacion d elo que hace el programa
+        
+        resumen = new JLabel("<html>La base de datos Basllena está repleta de juegos intereantes <br/>"
+                            + "que no te puedes perder. Para encontrarlos puedes buscarlos<br/> desde  "
+                            + "diferentes puntos de vista, Nombre, Genero, etc.. <br/>añadirlos a favoritos "
+                            + " y por supuesto ver sus imágenes. <br/><br/>Creada por Pedro Celard y Iago Cruz</html>");
+        resumen.setFont(e);
+        resumen.setBounds(275, 200, 600, 200);
+        
         
         /* ##### ELEMENTOS PARA BUSCAR ##### */
         
@@ -204,6 +214,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         panel.add(verjuego);
         panel.add(scroll);
         panel.add(scroll2);
+        panel.add(resumen);
     }
     
     /*
@@ -214,6 +225,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         buscar.setVisible(true);
         verFav.setVisible(true);
         cambusuario.setVisible(true);
+        resumen.setVisible(true);
         volver.setVisible(false);
         guion.setVisible(false);
         erroraño.setVisible(false);
@@ -238,6 +250,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         buscar.setVisible(false);
         verFav.setVisible(false);
         cambusuario.setVisible(false);
+        resumen.setVisible(false);
         volver.setVisible(true);
         iniBuscar.setVisible(true);
         vertodos.setVisible(true);
@@ -273,6 +286,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         buscar.setVisible(false);
         verFav.setVisible(false);
         cambusuario.setVisible(false);
+        resumen.setVisible(false);
         volver.setVisible(true);
         verjuego.setVisible(true);
             
@@ -286,15 +300,16 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             modelotabla.addColumn("Juego");
             modelotabla.addColumn("Comentario");
             //Añadimos diferentes filas dependiendo de los resultados
-            modelotabla.addRow(new String [] {"Portal ","Este es un juego macanudo"});
-            JTable tabla = new JTable(modelotabla); 
-            tabla = new JTable(modelotabla);
+            modelotabla.addRow(new String [] {"Portal 2","Este es un juego macanudo"});
+            modelotabla.addRow(new String [] {"Bioshock","Este es un juego chachi piruli"});
+            tablaFav = new JTable(modelotabla); 
+            tablaFav = new JTable(modelotabla);
             //Recogemos una columna y le damos un valor máximo y mínimo a su ancho para que no se pueda cambiar su tamaño
-            TableColumn columna = tabla.getColumn("Juego"); 
+            TableColumn columna = tablaFav.getColumn("Juego"); 
             columna.setMaxWidth(200);
             columna.setMinWidth(200);
-            tabla.getTableHeader().setReorderingAllowed(false);
-            scroll = new JScrollPane(tabla);
+            tablaFav.getTableHeader().setReorderingAllowed(false);
+            scroll = new JScrollPane(tablaFav);
             scroll.setBounds(20, 200, 690, 125);
             
             //Se añade la tabla al panel
@@ -314,6 +329,9 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 break;
             case 3:
                 game = con.devolverFecha((String)combaño.getSelectedItem(), (String)combaño.getSelectedItem());
+            case 4:
+                
+                game = con.devolverFecha((String)combaño.getSelectedItem(), (String)combaño2.getSelectedItem());
         }
         
         
@@ -405,10 +423,12 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             
             //Acceder a los elementos de busqueda
             case "Buscar" : 
+                    control=1;
                     elementosBuscar();
                     break;
             //Ver la tabla de juegos favoritos
             case "Favoritos":
+                    control=2;
                     cargaTablaFavoritos();
                     break;
             //Ir a la ventana de cambiar usuario
@@ -476,7 +496,6 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 }else if((combaño.isVisible()==true)&&(combaño2.isVisible()==true)){
                  contador=4;
                 }
-                System.out.println(contador);
                 cargaTablaAll(contador);
                 break;
         } 
@@ -485,10 +504,19 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     
     public void verJuego(){
         
-        String auxtit;
-            int i = tablaAll.getSelectedRow();
+        String auxtit="";
+        int i=0;
+        
+        if(control==1){
+            i = tablaAll.getSelectedRow();
             auxtit = (String)tablaAll.getValueAt(i, 0);
+            System.out.println("hola");
             
+        }else if(control==2){
+            i = tablaFav.getSelectedRow();
+            auxtit = (String)tablaFav.getValueAt(i, 0);
+            System.out.println("adios");
+        }
             Juegos game;
             Juegos igame;
             game = con.devolverUno(auxtit);

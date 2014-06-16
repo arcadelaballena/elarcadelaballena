@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import javax.swing.*;
 
@@ -116,9 +117,24 @@ public class VentanaJuegos extends JFrame{
         SteamStore.setBounds(450, 280, 150, 20);
         SteamStore.setFont(e);
         //Link a la pagina de Steam del juego
-        SteamStore2 = new JLabel("<html><a href=\""+ienlace+">"+ienlace+"</a></html>");
+        SteamStore2 = new JLabel("<html><a href="+ienlace+">"+"Enlace a la tienda de Steam"+"</a></html>");
         SteamStore2.setBounds(570, 280, 400, 20);
         SteamStore2.setFont(b);      
+        SteamStore2.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                desktop.browse(new URI(ienlace));
+                }
+                }
+                } catch (Exception eb) {
+                eb.printStackTrace();
+                }
+            }
+        });
         
         /*
         Comentario sobre el juego, se le quita el fondo para que sea igual al del fondo de la pantalla 
@@ -136,7 +152,10 @@ public class VentanaJuegos extends JFrame{
         botonFav.setFont(e);
         botonFav.setBounds(530, 380, 200, 20);
         
-        //
+        //Comentario para aumentar la imagen
+        aumentar=new JLabel("Haz click en las imagenes para aumentarlas");
+        aumentar.setBounds(650, 440, 400, 20);
+        aumentar.setFont(e);
         
         //Imagen de la portada del juego
         portada = new JLabel();
@@ -238,6 +257,7 @@ public class VentanaJuegos extends JFrame{
         panel.add(imagen1);
         panel.add(imagen2);
         panel.add(botonFav);
+        panel.add(aumentar);
     }
     
   
