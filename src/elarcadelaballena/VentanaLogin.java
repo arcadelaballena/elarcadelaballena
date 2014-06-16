@@ -16,10 +16,10 @@ import javax.swing.*;
 public class VentanaLogin extends JFrame implements ActionListener{
     
     Container panel;
-    JLabel imagen, usuario, contra;
-    JTextField tusuario;
-    JPasswordField tcontra;
-    JButton entrar, registrar;
+    JLabel imagen, usuario, contra, rusuario, rcontra, rcontra2, remail;
+    JTextField tusuario, rtusuario, rtemail;
+    JPasswordField tcontra, rtcontra, rtcontra2;
+    JButton entrar, registrar, raceptar, volver;
     JCheckBox recordaru, recordarc;
     ImageIcon img;
     
@@ -92,6 +92,54 @@ public class VentanaLogin extends JFrame implements ActionListener{
         registrar.setBounds(210, 420, 120, 20);
         registrar.addActionListener(this);
         
+        /* ######### PEDIMOS DATOS PARA REGISTRAR A UN USUARIO ############*/
+        
+        rusuario = new JLabel("Nombre de usuario");
+        rusuario.setBounds(50, 250, 200, 20);
+        rusuario.setFont(e);
+        rusuario.setVisible(false);
+        rtusuario = new JTextField();
+        rtusuario.setBounds(200, 250, 150, 20);
+        rtusuario.setFont(b);
+        rtusuario.setVisible(false);
+        
+        rcontra = new JLabel("Contraseña");
+        rcontra.setBounds(75, 300, 200, 20);
+        rcontra.setFont(e);
+        rcontra.setVisible(false);
+        rtcontra = new JPasswordField();
+        rtcontra.setBounds(200, 300, 150, 20);
+        rtcontra.setFont(b);
+        rtcontra.setVisible(false);
+        
+        rcontra2 = new JLabel("Repite la contraseña");
+        rcontra2.setBounds(40, 350, 200, 20);
+        rcontra2.setFont(e);
+        rcontra2.setVisible(false);
+        rtcontra2 = new JPasswordField();
+        rtcontra2.setBounds(200, 350, 150, 20);
+        rtcontra2.setFont(b);
+        rtcontra2.setVisible(false);
+        
+        remail = new JLabel("E-Mail");
+        remail.setBounds(90, 400, 200, 20);
+        remail.setFont(e);
+        remail.setVisible(false);
+        rtemail = new JTextField();
+        rtemail.setBounds(200, 400, 150, 20);
+        rtemail.setFont(b);
+        rtemail.setVisible(false);
+        
+        
+        volver = new JButton("Volver");
+        volver.setFont(e);
+        volver.setBounds(50, 420, 120, 20);
+        volver.addActionListener(this);
+        raceptar = new JButton("Aceptar");
+        raceptar.setFont(e);
+        raceptar.setBounds(210, 420, 120, 20);
+        raceptar.addActionListener(this);
+        
         //Por ultimo añadimos todos los elementos el panel
         panel.add(imagen);
         panel.add(usuario);
@@ -102,8 +150,51 @@ public class VentanaLogin extends JFrame implements ActionListener{
         panel.add(recordarc);
         panel.add(entrar);
         panel.add(registrar);
+        panel.add(rusuario);
+        panel.add(rtusuario);
+        panel.add(rcontra);
+        panel.add(rtcontra);
+        panel.add(rcontra2);
+        panel.add(rtcontra2);
+        panel.add(remail);
+        panel.add(rtemail);
+        panel.add(volver);
+        panel.add(raceptar);
     }
 
+    public void recibidor(){
+        
+        imagen.setVisible(true);
+        usuario.setVisible(true);
+        tusuario.setVisible(true);
+        recordaru.setVisible(true);
+        contra.setVisible(true);
+        tcontra.setVisible(true);
+        recordarc.setVisible(true);
+        entrar.setVisible(true);
+        registrar.setVisible(true);
+        
+    }
+    
+    public void verRegistrarse(){
+        usuario.setVisible(false);
+        tusuario.setVisible(false);
+        recordaru.setVisible(false);
+        contra.setVisible(false);
+        tcontra.setVisible(false);
+        recordarc.setVisible(false);
+        entrar.setVisible(false);
+        registrar.setVisible(false);
+        rusuario.setVisible(true);
+        rtusuario.setVisible(true);
+        rcontra.setVisible(true);
+        rtcontra.setVisible(true);
+        rcontra2.setVisible(true);
+        rtcontra2.setVisible(true);
+        remail.setVisible(true);
+        rtemail.setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent ev) {
         
@@ -116,7 +207,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
                 this.setVisible(false);
                 break;
             case "Registrarse":
-                System.out.println("Registrar un usuario");
+                verRegistrarse();
                 break;
         }
     }
