@@ -7,7 +7,7 @@ package elarcadelaballena;
 
 /**
  *
- * @author Naruba
+ * @author Iago
  */
 public class Juegos {
 

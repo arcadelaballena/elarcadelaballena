@@ -15,10 +15,16 @@ public class Aplicacion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+
         Basllena base = new Basllena();
-        //VentanaJuegos obx = new VentanaJuegos();
+        base.comprobarUser("admin", "vallena");
+
+        
         //VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
+        //VentanaBusqueda busq = new VentanaBusqueda();
         //VentanaVisualizar vis = new VentanaVisualizar();
+
     }
 }
