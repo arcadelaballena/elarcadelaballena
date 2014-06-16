@@ -17,8 +17,8 @@ public class Usuario extends Persona {
     public Usuario() {
     }
 
-    public Usuario(int codigo, int admin, String contrasinal, String nombre, String alias, String ultFechaLogin) {
-        super(nombre, alias, ultFechaLogin);
+    public Usuario(int codigo, int admin, String contrasinal, String nombre,  String ultFechaLogin) {
+        super(nombre, ultFechaLogin);
         this.codigo = codigo;
         this.admin = admin;
         this.contrasinal = contrasinal;

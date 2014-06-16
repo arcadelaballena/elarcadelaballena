@@ -29,7 +29,7 @@ public class Basllena {
     public Basllena() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "root");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error en el Driver");
         } catch (SQLException ex) {
@@ -86,7 +86,7 @@ public class Basllena {
         ArrayList<Juegos> ley = new ArrayList();
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from juegos where fechaSalida>='" + fecha1 + "' AND fechaSalida<='" + fecha2 + "';");
+            resultado = consulta.executeQuery("select * from juegos where fechaSalida like '" + fecha1 + "%' AND fechaSalida like'" + fecha2 + "%';");
             while (resultado.next()) {
                 ley.add(new Juegos(resultado.getString("nombre"),
                         resultado.getString("genero"),
@@ -185,6 +185,25 @@ public class Basllena {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error en la obtencion de la consulta");
+        }
+        return comprobante;
+    }
+
+    public boolean creacionUser(String nombre, String contra, String email) {
+        boolean comprobante = false;
+        String[] nombres = null;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select nombre from usuarios;");
+            while (resultado.next()) {
+                nombres = new String[]{resultado.getString("nombre")};
+            }
+            for (int i = 0; i < nombres.length; i++) {
+                if (nombres[i].equalsIgnoreCase(nombre)) {
+                    
+                }
+            }
+        } catch (SQLException ex) {
         }
         return comprobante;
     }
