@@ -5,6 +5,8 @@
  */
 package elarcadelaballena;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Pedro
@@ -20,6 +22,8 @@ public class Aplicacion {
         //Basllena base = new Basllena();
         //base.comprobarUser("admin", "vallena");
         //base.devolverFecha("1999", "2006");
+
+        Basllena base = new Basllena();
         
         VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
