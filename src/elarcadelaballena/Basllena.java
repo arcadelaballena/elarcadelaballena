@@ -171,7 +171,7 @@ public class Basllena {
         boolean comprobante = false;
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select contraseña from usuarios where nombre='admin';");
+            resultado = consulta.executeQuery("select contraseña from usuarios where nombre='"+nombre+"';");
             while (resultado.next()) {
                 comprueba = resultado.getString("contraseña");
                 if (comprueba.equals(contra)) {
@@ -190,7 +190,7 @@ public class Basllena {
     }
 /**
  * Este metodo administrará la creación de usuarios. Si el nombre ya existe en la base, devolverá un 1
- * si el email ya está en uso, devolverá un 2
+ * si el email ya está en uso, devolverá un 2.
  * si la contraseña no es la misma, devolverá un 3.
  * 
  * @param nombre

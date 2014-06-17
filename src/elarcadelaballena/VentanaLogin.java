@@ -216,24 +216,27 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
         switch(opcion){
             case "Entrar" :
-                boolean comp;
                 
                 String contra="";
-                char con[]=tcontra.getPassword();
-                for(int i=0;i<con.length;i++){
-                   contra=contra+con[i];
+                char concat[]=rtcontra.getPassword();
+                for(int i=0;i<concat.length;i++){
+                   contra=contra+concat[i];
                     
                 }
-                System.out.println(contra);
-                /*
-                comp=con.comprobarUser(tusuario.getText(),contra);
-                System.out.println(comp);
-                if(comp==true){
-                    System.out.println("hola");
-                    VentanaBusqueda VB = new VentanaBusqueda();
-                    this.setVisible(false);
+                
+                
+                if(tusuario.getText().equals("")){
+                     int inv=JOptionPane.showConfirmDialog(null,"¿Quieres entrar como invitado?",null,JOptionPane.YES_NO_OPTION);
+                     if(inv==0){
+                        VentanaBusqueda VB = new VentanaBusqueda();
+                        this.setVisible(false);
+                     }else if(inv==1){
+                     }
+                }else if(con.comprobarUser(tusuario.getText(),contra)){
+                        VentanaBusqueda VB = new VentanaBusqueda();
+                        this.setVisible(false);                    
                 }
-                */
+                
                
                 break;
             case "Registrarse":
@@ -241,6 +244,23 @@ public class VentanaLogin extends JFrame implements ActionListener{
                 break;
             case "Volver":
                 recibidor();
+                break;
+            
+            case "Aceptar":
+                
+                String c1="";
+                char concat1[]=rtcontra.getPassword();
+                for(int i=0;i<concat1.length;i++){
+                   c1=c1+concat1[i];
+                }
+                String c2="";
+                char concat2[]=rtcontra2.getPassword();
+                for(int i=0;i<concat2.length;i++){
+                   c2=c2+concat2[i];
+                }
+                
+                System.out.println(con.creacionUser(rtusuario.getText(), c1, c2, rtemail.getText()));;
+                        
                 break;
         }
     }
