@@ -23,7 +23,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
     JCheckBox recordaru, recordarc;
     ImageIcon img;
     
-    
+    Basllena con = new Basllena();
     /* Formamos la ventana que contendrá todos los elementos */ 
     public VentanaLogin(){
         
@@ -133,12 +133,14 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
         volver = new JButton("Volver");
         volver.setFont(e);
-        volver.setBounds(50, 420, 120, 20);
+        volver.setBounds(50, 450, 120, 20);
         volver.addActionListener(this);
+        volver.setVisible(false);
         raceptar = new JButton("Aceptar");
         raceptar.setFont(e);
-        raceptar.setBounds(210, 420, 120, 20);
+        raceptar.setBounds(210, 450, 120, 20);
         raceptar.addActionListener(this);
+        raceptar.setVisible(false);
         
         //Por ultimo añadimos todos los elementos el panel
         panel.add(imagen);
@@ -173,7 +175,16 @@ public class VentanaLogin extends JFrame implements ActionListener{
         recordarc.setVisible(true);
         entrar.setVisible(true);
         registrar.setVisible(true);
-        
+        rusuario.setVisible(false);
+        rtusuario.setVisible(false);
+        rcontra.setVisible(false);
+        rtcontra.setVisible(false);
+        rcontra2.setVisible(false);
+        rtcontra2.setVisible(false);
+        remail.setVisible(false);
+        rtemail.setVisible(false);
+        volver.setVisible(false);
+        raceptar.setVisible(false);
     }
     
     public void verRegistrarse(){
@@ -193,6 +204,8 @@ public class VentanaLogin extends JFrame implements ActionListener{
         rtcontra2.setVisible(true);
         remail.setVisible(true);
         rtemail.setVisible(true);
+        volver.setVisible(true);
+        raceptar.setVisible(true);
     }
     
     @Override
@@ -203,11 +216,31 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
         switch(opcion){
             case "Entrar" :
-                VentanaBusqueda VB = new VentanaBusqueda();
-                this.setVisible(false);
+                boolean comp;
+                
+                String contra="";
+                char con[]=tcontra.getPassword();
+                for(int i=0;i<con.length;i++){
+                   contra=contra+con[i];
+                    
+                }
+                System.out.println(contra);
+                /*
+                comp=con.comprobarUser(tusuario.getText(),contra);
+                System.out.println(comp);
+                if(comp==true){
+                    System.out.println("hola");
+                    VentanaBusqueda VB = new VentanaBusqueda();
+                    this.setVisible(false);
+                }
+                */
+               
                 break;
             case "Registrarse":
                 verRegistrarse();
+                break;
+            case "Volver":
+                recibidor();
                 break;
         }
     }

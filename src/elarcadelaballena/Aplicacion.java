@@ -23,7 +23,7 @@ public class Aplicacion {
         //base.comprobarUser("admin", "vallena");
         //base.devolverFecha("1999", "2006");
 
-        Basllena base = new Basllena();
+        //Basllena base = new Basllena();
         
         VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
