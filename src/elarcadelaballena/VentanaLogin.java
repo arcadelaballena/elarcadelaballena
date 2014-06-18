@@ -69,6 +69,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         recordaru.setBounds(280, 280, 100, 20);
         recordaru.setFont(b);
         recordaru.addActionListener(this);
+        recordaru.setVisible(false);
         
         //Etiqueta contraseña
         contra = new JLabel("Contraseña");
@@ -83,6 +84,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         recordarc.setBounds(280, 360, 100, 20);
         recordarc.setFont(b);
         recordarc.addActionListener(this);
+        recordarc.setVisible(false);
         
         //Boton para entrar con usuario
         entrar = new JButton("Entrar");
@@ -173,10 +175,10 @@ public class VentanaLogin extends JFrame implements ActionListener{
         imagen.setVisible(true);
         usuario.setVisible(true);
         tusuario.setVisible(true);
-        recordaru.setVisible(true);
+        recordaru.setVisible(false);
         contra.setVisible(true);
         tcontra.setVisible(true);
-        recordarc.setVisible(true);
+        recordarc.setVisible(false);
         entrar.setVisible(true);
         registrar.setVisible(true);
         rusuario.setVisible(false);
@@ -217,7 +219,6 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
          //en opcion recogemos el valor que devuelve el evento en un String para poder comparar en el Switch
         String opcion = String.valueOf(ev.getActionCommand());
-        System.out.println(String.valueOf(ev.getActionCommand()));
         
         switch(opcion){
             case "Entrar" :
@@ -237,6 +238,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
                         VentanaBusqueda VB = new VentanaBusqueda();
                         this.setVisible(false);
                         VB.invitado();
+                        Persona invitado=new Invitado();
                      }else if(inv==1){
                      }
                 }else if(con.comprobarUser(tusuario.getText(),contra)){
@@ -244,7 +246,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
                         VentanaBusqueda VB = new VentanaBusqueda();
                         this.setVisible(false);                    
                 }
-                ficheroRecordar();
+                //ficheroRecordar();
 
                
                 break;
@@ -273,7 +275,9 @@ public class VentanaLogin extends JFrame implements ActionListener{
                 
                 switch(comp){
                     case 0:
+                        con.creacionUser(rtusuario.getText(), c1,c2, rtemail.getText());
                         JOptionPane.showMessageDialog(null, "Usuario creado.");
+                        recibidor();
                         break;
                     case 1:
                         JOptionPane.showMessageDialog(null, "El nombre de usuario "+rtusuario.getText()+" ya existe.");
@@ -288,7 +292,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         }
     }
     
-    
+    /*
     public void ficheroRecordar(){
                        
         File u = new File("usuario.txt");
@@ -308,5 +312,5 @@ public class VentanaLogin extends JFrame implements ActionListener{
                     System.out.println("olvida la contra");
                 }
     }
-   
+   */
 }

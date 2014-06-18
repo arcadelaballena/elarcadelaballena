@@ -23,9 +23,9 @@ public class Aplicacion {
        
         //Basllena base = new Basllena();
         
-        //VentanaLogin log = new VentanaLogin();
+        VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
         //VentanaVisualizar vis = new VentanaVisualizar();
-
+        //VentanaFav v = new VentanaFav("Portal 2");
     }
 }

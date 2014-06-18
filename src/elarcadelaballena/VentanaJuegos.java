@@ -5,6 +5,8 @@
 package elarcadelaballena;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
@@ -17,7 +19,7 @@ import javax.swing.*;
  * @author Pedro
  */
 
-public class VentanaJuegos extends JFrame{
+public class VentanaJuegos extends JFrame implements ActionListener{
     
     Container panel;
     JLabel titulo, titulo2, genero, genero2, desarrolladora, 
@@ -154,6 +156,7 @@ public class VentanaJuegos extends JFrame{
         botonFav = new JButton("Añadir a Favoritos");
         botonFav.setFont(e);
         botonFav.setBounds(530, 380, 200, 20);
+        botonFav.addActionListener(this);
         
         //Comentario para aumentar la imagen
         aumentar=new JLabel("Haz click en las imagenes para aumentarlas");
@@ -261,6 +264,19 @@ public class VentanaJuegos extends JFrame{
         panel.add(imagen2);
         panel.add(botonFav);
         panel.add(aumentar);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        
+        String opcion = String.valueOf(ev.getActionCommand());
+        
+        switch(opcion){
+            case "Añadir a Favoritos":
+                VentanaFav fav = new VentanaFav(titulo2.getText());
+                break;
+        }
+        
     }
 
   

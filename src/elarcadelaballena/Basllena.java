@@ -29,7 +29,7 @@ public class Basllena {
     public Basllena() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error en el Driver");
         } catch (SQLException ex) {
