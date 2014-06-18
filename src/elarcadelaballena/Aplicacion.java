@@ -18,14 +18,13 @@ public class Aplicacion {
      */
     public static void main(String[] args) {
 
-
         Basllena base = new Basllena();
-       
-        //Basllena base = new Basllena();
+        Fichlleno fich = new Fichlleno();
         
+        
+      
         //VentanaLogin log = new VentanaLogin();
         //VentanaBusqueda busq = new VentanaBusqueda();
         //VentanaVisualizar vis = new VentanaVisualizar();
-
     }
 }
