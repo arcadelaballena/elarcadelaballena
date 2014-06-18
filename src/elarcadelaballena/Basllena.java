@@ -29,7 +29,7 @@ public class Basllena {
     public Basllena() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/basllena", "root", "root");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, " Error en el Driver");
         } catch (SQLException ex) {
@@ -171,7 +171,7 @@ public class Basllena {
         boolean comprobante = false;
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select contraseña from usuarios where nombre='"+nombre+"';");
+            resultado = consulta.executeQuery("select contraseña from usuarios where nombre='" + nombre + "';");
             while (resultado.next()) {
                 comprueba = resultado.getString("contraseña");
                 if (comprueba.equals(contra)) {
@@ -188,19 +188,20 @@ public class Basllena {
         }
         return comprobante;
     }
-/**
- * Este metodo administrará la creación de usuarios. Si el nombre ya existe en la base, devolverá un 1
- * si el email ya está en uso, devolverá un 2.
- * si la contraseña no es la misma, devolverá un 3.
- * 
- * @param nombre
- * @param contra
- * @param recontra
- * @param email
- * @return 
- */
+
+    /**
+     * Este metodo administrará la creación de usuarios. Si el nombre ya existe
+     * en la base, devolverá un 1 si el email ya está en uso, devolverá un 2. si
+     * la contraseña no es la misma, devolverá un 3.
+     *
+     * @param nombre
+     * @param contra
+     * @param recontra
+     * @param email
+     * @return
+     */
     public int creacionUser(String nombre, String contra, String recontra, String email) {
-        
+
         int comprobante = 0;
         String[] cuenta = null;
         String[] emails = null;
@@ -223,10 +224,30 @@ public class Basllena {
                     break;
                 } else {
                     comprobante = 0;
+                    userToBase(comprobante, nombre, contra, email);
                 }
             }
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Fallo al recoger consulta de usuarios");
         }
         return comprobante;
+    }
+
+    public void userToBase(int comprobante, String nombre, String contra, String email) {
+        int ids = 0;
+        if (comprobante == 0) {
+            try {
+                consulta = conexion.createStatement();
+                resultado = consulta.executeQuery("select count(IDu) from usuarios;");
+                while (resultado.next()) {
+                    ids = resultado.getInt(1);
+                }
+                System.out.println(ids);
+                consulta.executeUpdate("INSERT into usuarios values('" + (ids + 1) + "','" + nombre + "','" + contra + "',0,'" + email + "');");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, " ERROR FATAL BASE DE DATOS DAÑADA");
+
+            }
+        }
     }
 }
