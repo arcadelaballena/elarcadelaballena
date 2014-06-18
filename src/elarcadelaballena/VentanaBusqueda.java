@@ -31,7 +31,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     DefaultTableModel modelotabla, modelotablaAll;
     JScrollPane scroll, scroll2;
     String ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace,Ltitulo, Limagen1, Limagen2;
-    int aux, control;
+    int aux, control, invita=0;
     
     ArrayList<Juegos> game;
     Basllena con = new Basllena();
@@ -51,8 +51,10 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
-    }
-    
+        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        setIconImage(ic.getImage());
+    }   
+        
     public void iniciarComponentes(){
         
         
@@ -329,9 +331,10 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                 break;
             case 3:
                 game = con.devolverFecha((String)combaño.getSelectedItem(), (String)combaño.getSelectedItem());
+                break;
             case 4:
-                
                 game = con.devolverFecha((String)combaño.getSelectedItem(), (String)combaño2.getSelectedItem());
+                break;
         }
         
         
@@ -348,9 +351,13 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         vertodos.setVisible(false);
         iniBuscar.setVisible(false);
         scroll.setVisible(false);
-        verjuego.setVisible(false);
         volver.setVisible(true);
-        verjuego.setVisible(true);
+        if(invita==1){
+          verjuego.setVisible(false);  
+        }else{
+          verjuego.setVisible(true);
+        }
+        
         
             modelotablaAll = new DefaultTableModel(){
                 @Override
@@ -428,8 +435,13 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                     break;
             //Ver la tabla de juegos favoritos
             case "Favoritos":
+                if(invita==1){
+                    JOptionPane.showMessageDialog(null, "<html>Esta herramienta está bloqueada para los invitados.<br/>"
+                            + "Si quiere poder registrar favoritos y ver juegos por<br/> favor regístrese.</html>");
+                }else{
                     control=2;
                     cargaTablaFavoritos();
+                }
                     break;
             //Ir a la ventana de cambiar usuario
             case "Cambiar de usuario"  :
@@ -526,6 +538,11 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         VJ = new VentanaJuegos(game.getNombre(), game.getGenero(),  game.getDesarrollador(),  game.getDistribuidor(),
                 game.getFechaSalida(),  game.getComentario(),  game.getEnlace(), igame.getPortada(), igame.getImagen1(), igame.getImagen2());
         
+    }
+    
+    public void invitado(){
+        
+        this.invita=1;
     }
             
             

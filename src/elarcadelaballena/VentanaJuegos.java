@@ -29,8 +29,9 @@ public class VentanaJuegos extends JFrame{
     JButton botonFav;
     ImageIcon img, img1, img2;
     String ititulo, igenero,  idesarrollador,  idistribuidor,  ifechaSalida,  icomentario,  ienlace, Ltitulo, Limagen1, Limagen2;
+    int invita;
     
-    
+    public VentanaJuegos(){}
     
     public VentanaJuegos(String ititulo,String igenero, String idesarrollador, String idistribuidor, String ifechaSalida, String icomentario, String ienlace, String Ltitulo, String Limagen1, String Limagen2){
         
@@ -55,6 +56,8 @@ public class VentanaJuegos extends JFrame{
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        setIconImage(ic.getImage());        
     }
     
     public void iniciarComponentes(){
@@ -259,7 +262,7 @@ public class VentanaJuegos extends JFrame{
         panel.add(botonFav);
         panel.add(aumentar);
     }
-    
+
   
     
     
