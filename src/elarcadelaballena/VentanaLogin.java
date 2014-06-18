@@ -7,6 +7,7 @@ package elarcadelaballena;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.*;
 
 /**
@@ -35,7 +36,8 @@ public class VentanaLogin extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);  //No se puede cambiar el tamaño
         setVisible(true);
-        
+        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        setIconImage(ic.getImage());
     }
     
     public void iniciarComponentes(){
@@ -66,6 +68,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         recordaru = new JCheckBox("Recordar");
         recordaru.setBounds(280, 280, 100, 20);
         recordaru.setFont(b);
+        recordaru.addActionListener(this);
         
         //Etiqueta contraseña
         contra = new JLabel("Contraseña");
@@ -79,6 +82,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         recordarc = new JCheckBox("Recordar");
         recordarc.setBounds(280, 360, 100, 20);
         recordarc.setFont(b);
+        recordarc.addActionListener(this);
         
         //Boton para entrar con usuario
         entrar = new JButton("Entrar");
@@ -213,30 +217,35 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
          //en opcion recogemos el valor que devuelve el evento en un String para poder comparar en el Switch
         String opcion = String.valueOf(ev.getActionCommand());
+        System.out.println(String.valueOf(ev.getActionCommand()));
         
         switch(opcion){
             case "Entrar" :
                 
                 String contra="";
-                char concat[]=rtcontra.getPassword();
+                char concat[]=tcontra.getPassword();
                 for(int i=0;i<concat.length;i++){
-                   contra=contra+concat[i];
-                    
+                   contra=contra+concat[i];                
                 }
+               
                 
                 
                 if(tusuario.getText().equals("")){
                      int inv=JOptionPane.showConfirmDialog(null,"¿Quieres entrar como invitado?",null,JOptionPane.YES_NO_OPTION);
                      if(inv==0){
+                         
                         VentanaBusqueda VB = new VentanaBusqueda();
                         this.setVisible(false);
+                        VB.invitado();
                      }else if(inv==1){
                      }
                 }else if(con.comprobarUser(tusuario.getText(),contra)){
+                    
                         VentanaBusqueda VB = new VentanaBusqueda();
                         this.setVisible(false);                    
                 }
-                
+                ficheroRecordar();
+
                
                 break;
             case "Registrarse":
@@ -259,11 +268,45 @@ public class VentanaLogin extends JFrame implements ActionListener{
                    c2=c2+concat2[i];
                 }
                 
-                System.out.println(con.creacionUser(rtusuario.getText(), c1, c2, rtemail.getText()));;
-                        
-                break;
+                
+                int comp=con.creacionUser(rtusuario.getText(), c1, c2, rtemail.getText());
+                
+                switch(comp){
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Usuario creado.");
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "El nombre de usuario "+rtusuario.getText()+" ya existe.");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "El e-mail "+rtemail.getText()+" ya está en uso.");
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(null, "<html>La contraseña introducida no es correcta.<br/>Asegúrate de que los dos campos concuerdan.</html>");
+                        break;
+                }
         }
     }
     
+    
+    public void ficheroRecordar(){
+                       
+        File u = new File("usuario.txt");
+        File c = new File("contra.txt");
+        String us= tusuario.getText();
+        String contra;
+        
+                if(recordaru.isSelected()==true){
+                    System.out.println("Recuerda el user");
+                }else{
+                    System.out.println("olvida el user");
+                }
+                
+                if(recordarc.isSelected()){
+                    System.out.println("Recuerda la contra");
+                }else{
+                    System.out.println("olvida la contra");
+                }
+    }
    
 }
