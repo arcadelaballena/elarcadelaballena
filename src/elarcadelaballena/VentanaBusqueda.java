@@ -34,6 +34,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
     int aux, control, invita=0;
     
     ArrayList<Juegos> game;
+    ArrayList<String> favgame;
     Basllena con = new Basllena();
     VentanaJuegos VJ;
     Juegos jue;
@@ -51,7 +52,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
-        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        ImageIcon ic = new ImageIcon(getClass().getResource("/icono.png"));
         setIconImage(ic.getImage());
     }   
         
@@ -302,8 +303,19 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
             modelotabla.addColumn("Juego");
             modelotabla.addColumn("Comentario");
             //Añadimos diferentes filas dependiendo de los resultados
+            
+            Fichlleno fill = new Fichlleno();
+            
+            ArrayList<String> favor = fill.listarFavoritos(Persona.getNombre());
+            for(int i=0; i<favor.size();i++){
+               String []favorito = {favor.get(i)} ;
+               modelotabla.addRow(favorito);
+            }
             modelotabla.addRow(new String [] {"Portal 2","Este es un juego macanudo"});
             modelotabla.addRow(new String [] {"Bioshock","Este es un juego chachi piruli"});
+            
+            
+            
             tablaFav = new JTable(modelotabla); 
             tablaFav = new JTable(modelotabla);
             //Recogemos una columna y le damos un valor máximo y mínimo a su ancho para que no se pueda cambiar su tamaño
@@ -375,7 +387,7 @@ public class VentanaBusqueda extends JFrame implements ActionListener{
                // ArrayList<Juegos> game = con.devolverTodo();
             for(int i=0; i<game.size();i++){
                 
-                System.out.println(game.get(i));
+                //System.out.println(game.get(i));
                 Juegos aux = game.get(i);
                 String []juego = {aux.getNombre(),aux.getGenero(), aux.getDesarrollador(), aux.getDistribuidor(),
                                   aux.getFechaSalida(), aux.getEnlace()};

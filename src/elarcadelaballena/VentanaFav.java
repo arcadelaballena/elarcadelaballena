@@ -25,6 +25,7 @@ public class VentanaFav extends JFrame implements ActionListener{
     JButton volver, añadir;
     String nombre;
     
+    
     public VentanaFav(String nombre){
         
         this.nombre=nombre;
@@ -36,7 +37,7 @@ public class VentanaFav extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
-        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        ImageIcon ic = new ImageIcon(getClass().getResource("/icono.png"));
         setIconImage(ic.getImage());        
     }
      public void iniciarComponentes(){
@@ -86,6 +87,11 @@ public class VentanaFav extends JFrame implements ActionListener{
                 break;
                 
             case "Añadir":
+                
+                Fichlleno fich= new Fichlleno();
+                System.out.println(Persona.getNombre());
+                fich.crearFavoritos(Persona.getNombre(), nombre, texto.getText());
+                this.setVisible(false);
                 break;
         }
         

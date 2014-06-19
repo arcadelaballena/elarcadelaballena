@@ -11,23 +11,22 @@ package elarcadelaballena;
  */
 public class Persona {
 
-    private String nombre,email;
+    private static String nombre,email;
 
     public Persona() {
     }
-    public Persona(String nombre,String email){
-    this.nombre=nombre;
-    
-    this.email=email;
+    public Persona(String nom_bre,String e_mail){
+    nombre=nom_bre;  
+    email=e_mail;
     
     }
 
-    public String getNombre() {
+    public static String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public static void setNombre(String nom_bre) {
+        nombre = nom_bre;
     }
 
    
@@ -36,8 +35,8 @@ public class Persona {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email=email;
+    public void setEmail(String e_mail) {
+        email=e_mail;
     }
     
 }

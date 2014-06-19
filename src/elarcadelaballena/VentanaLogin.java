@@ -36,7 +36,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);  //No se puede cambiar el tamaño
         setVisible(true);
-        ImageIcon ic = new ImageIcon(getClass().getResource("/imagen.png"));
+        ImageIcon ic = new ImageIcon(getClass().getResource("/icono.png"));
         setIconImage(ic.getImage());
     }
     
@@ -222,6 +222,10 @@ public class VentanaLogin extends JFrame implements ActionListener{
         
         switch(opcion){
             case "Entrar" :
+               
+                //Persona p = new Persona();
+                Persona.setNombre(tusuario.getText());
+                System.out.println(Persona.getNombre());
                 
                 String contra="";
                 char concat[]=tcontra.getPassword();
@@ -246,7 +250,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
                         VentanaBusqueda VB = new VentanaBusqueda();
                         this.setVisible(false);                    
                 }
-                //ficheroRecordar();
+                
 
                
                 break;
@@ -291,26 +295,14 @@ public class VentanaLogin extends JFrame implements ActionListener{
                 }
         }
     }
-    
     /*
-    public void ficheroRecordar(){
-                       
-        File u = new File("usuario.txt");
-        File c = new File("contra.txt");
-        String us= tusuario.getText();
-        String contra;
+    public Persona EnviarPersona(){
         
-                if(recordaru.isSelected()==true){
-                    System.out.println("Recuerda el user");
-                }else{
-                    System.out.println("olvida el user");
-                }
-                
-                if(recordarc.isSelected()){
-                    System.out.println("Recuerda la contra");
-                }else{
-                    System.out.println("olvida la contra");
-                }
+                Persona p = new Persona();
+                p.setNombre(tusuario.getText());
+                System.out.println(p.getNombre());
+        
+                return p;
     }
-   */
+    */
 }
